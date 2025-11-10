@@ -91,6 +91,17 @@ class HangmanUI:
         else:
             print(f"💀 You lost. The word was '{secret_word.upper()}'.\n")
 
+    def ask_replay(self) -> bool:
+        """Ask the player if they want to play again."""
+        while True:
+            choice = input("Play again? [Y/N]: ").strip().lower()
+            if choice in ("y", "yes"):
+                return True
+            if choice in ("n", "no"):
+                return False
+            print("Please type Y or N.")
+
+
 
 class HangmanGame:
     def __init__(self, words: List[str], max_lives: int = 6, secret_word: Optional[str] = None):
