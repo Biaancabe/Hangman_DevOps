@@ -93,17 +93,11 @@ class HangmanUI:
 
 
 class HangmanGame:
-    """Core game logic for Hangman."""
-    def __init__(self, words: Optional[List[str]] = None, max_lives: int = 6, secret_word: Optional[str] = None):
-        if secret_word:
-            self.secret_word = secret_word.strip().lower()
-        else:
-            if not words:
-                raise ValueError("Provide either a secret_word or a non-empty words list.")
-            self.secret_word = random.choice(words).lower()
-
+    def __init__(self, words: List[str], max_lives: int = 6, secret_word: Optional[str] = None):
+        self.words = words
         self.max_lives = max_lives
         self.ui = HangmanUI()
+        self.secret_word = (secret_word or random.choice(self.words)).lower()
         self.guessed_letters: Set[str] = set()
         self.wrong_guesses: Set[str] = set()
         self.lives_used = 0
